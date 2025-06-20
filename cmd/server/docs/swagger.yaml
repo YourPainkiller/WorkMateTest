@@ -1,0 +1,78 @@
+definitions:
+  dto.CreateTaskResponse:
+    properties:
+      id:
+        type: string
+    type: object
+  dto.Empty:
+    type: object
+  dto.GetTaskResponse:
+    properties:
+      created_at:
+        type: string
+      duration_secs:
+        type: number
+      error:
+        type: string
+      id:
+        type: string
+      status:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: Manupulation with I/O bound tasks via API
+  title: I/O bound task API
+  version: "1.0"
+paths:
+  /tasks:
+    post:
+      description: Create task
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CreateTaskResponse'
+      summary: Create task
+      tags:
+      - tasks
+  /tasks/{id}:
+    delete:
+      description: Delete task by ID
+      parameters:
+      - description: Task ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/dto.Empty'
+      summary: Delete task
+      tags:
+      - tasks
+    get:
+      description: Get task by ID
+      parameters:
+      - description: Task ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.GetTaskResponse'
+      summary: Get task
+      tags:
+      - tasks
+swagger: "2.0"
